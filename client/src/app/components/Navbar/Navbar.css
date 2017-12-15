@@ -1,0 +1,18 @@
+.navbar {
+  background-color: whitesmoke;
+  height: 50px;
+}
+
+.navbar a {
+  margin: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.navbar a:visited {
+  color: blue;
+}
+
+.navbar a:hover {
+  color: red;
+}

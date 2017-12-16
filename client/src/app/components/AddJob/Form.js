@@ -11,8 +11,8 @@ export default function Form(props) {
         onChange={props.handleChange}/>
       <label>Job ID(required)</label>
       <input
-        name="jobid"
-        value={props.jobid}
+        name="jobId"
+        value={props.jobId}
         type="text"
         onChange={props.handleChange}/>
       <label>Phone #</label>

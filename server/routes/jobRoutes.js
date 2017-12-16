@@ -10,6 +10,7 @@ jobRoutes.route("/")
     })
   })
   .post((req, res) => {
+    console.log(req.body)
     const newJob = new Job(req.body);
     newJob.save(err => {
       if (err) return res.status(500).send(err);

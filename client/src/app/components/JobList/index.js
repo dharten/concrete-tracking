@@ -2,22 +2,43 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 
-import jobs from "../../../redux/Job";
+// import jobs from "../../../redux/Job";
 import "../../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
 import {getJobsList, addJob, deleteJob} from "../../../redux/Job";
 
 const selectRowProp = {
   mode: 'checkbox',
   clickToSelect: true,
-  unselectable: [2],
-  selected: [1],
+  // hideSelectColumn: true,
+  // unselectable: [2],
+  // selected: [1],
   bgColor: 'orange'
 };
 
 class JobList extends Component {
+  constructor(props) {
+    super(props);
+    this.jobs = getJobsList();
+    // this.state = {
+    //   data: this.jobs
+    // }
+    this.handleDeleteJob = this.handleDeleteJob.bind(this);
+  }
 
-  handleDeleteJob() {
-    this.refs.table.deleteJob(jobs._id)
+  handleDeleteJob(row) {
+    row.forEach(id => {
+      this.props.deleteJob(id)
+    })
+
+    // this.jobs = this.props.jobs.filter(job => {
+    //   job._id === row.toString() && deleteJob();
+    //   // return job._id !== row;
+    //   console.log("jobId", job._id, "row", row.join());
+    //   console.log("jobId", typeof job._id, "row", typeof row);
+    // })
+    // this.setState({
+    //   data: this.jobs
+    // })
   }
 
   render() {
@@ -32,10 +53,11 @@ class JobList extends Component {
             options={{onDeleteRow: this.handleDeleteJob}}
             selectRow={selectRowProp}
             bodyStyle={{background: "white"}}>
-          <TableHeaderColumn isKey dataField='jobId'>Job ID</TableHeaderColumn>
+            <TableHeaderColumn isKey dataField='_id'>Job ID</TableHeaderColumn>
+            <TableHeaderColumn dataField='jobId'>Client ID</TableHeaderColumn>
           <TableHeaderColumn dataField='name'>Name</TableHeaderColumn>
         </BootstrapTable>
-        <button onClick={this.handleDeleteJob}>Delete</button>
+        {/* <button onClick={this.handleDeleteJob}>Delete</button> */}
       </div>
     )}
   }

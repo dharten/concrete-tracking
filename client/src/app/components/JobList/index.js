@@ -1,22 +1,44 @@
-import React from "react";
+import React, {Component} from "react";
 import {connect} from "react-redux";
-import {getJobsList, addJob} from "../../../redux/Job";
-import Job from "./JobItem";
+import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 
-function JobList(props) {
-  const jobs = props.jobs.map(job => {
-    return(
-      <Job
-        key={job._id}
-        job={job}/>
-    )
-  })
-  return(
-    <div>
-      {jobs}
-    </div>
-  );
-}
+import jobs from "../../../redux/Job";
+import "../../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
+import {getJobsList, addJob, deleteJob} from "../../../redux/Job";
+
+const selectRowProp = {
+  mode: 'checkbox',
+  clickToSelect: true,
+  unselectable: [2],
+  selected: [1],
+  bgColor: 'orange'
+};
+
+class JobList extends Component {
+
+  handleDeleteJob() {
+    this.refs.table.deleteJob(jobs._id)
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Current Jobs</h1>
+        <p>The purpose of this page is to view the list of current jobs along with the number of samples that need to be tested for the current date.</p>
+        <BootstrapTable
+            data={this.props.jobs}
+            remote={true}
+            deleteRow={true}
+            options={{onDeleteRow: this.handleDeleteJob}}
+            selectRow={selectRowProp}
+            bodyStyle={{background: "white"}}>
+          <TableHeaderColumn isKey dataField='jobId'>Job ID</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>Name</TableHeaderColumn>
+        </BootstrapTable>
+        <button onClick={this.handleDeleteJob}>Delete</button>
+      </div>
+    )}
+  }
 
 function mapStateToProps(state) {
   return{
@@ -24,4 +46,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {getJobsList, addJob})(JobList);
+export default connect(mapStateToProps, {getJobsList, addJob, deleteJob})(JobList);

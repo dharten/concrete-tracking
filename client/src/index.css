@@ -2,5 +2,35 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
 
+th, tr, td {
+  border: 1px black solid;
+  text-align: center;
+}
+
+table {
+  margin-left: 50px;
+}
+
+td {
+  width: 200px;
+  border: 1px black solid;
+}
+
+button {
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100px;
+  margin: 10px 0 0 50px;
+  color: black;
+}
+
+.checkout {
+  background-color: #39aa39;
+}
+
+.delete {
+  background-color: #c34646;
 }

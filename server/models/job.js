@@ -18,7 +18,7 @@ const jobSchema = new Schema ({
     zip: String
   },
   phone: String,
-  checked: Boolean
+  checkedOut: Boolean
 })
 
 module.exports = mongoose.model("Job", jobSchema);

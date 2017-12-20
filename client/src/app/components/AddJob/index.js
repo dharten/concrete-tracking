@@ -38,8 +38,9 @@ class AddJob extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+    // e.preventDefault();
     this.props.addJob(this.state);
+
   }
 
 

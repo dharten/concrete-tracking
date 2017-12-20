@@ -1,56 +1,60 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-// import {BootstrapTable, TableHeaderColumn, InsertButton} from "react-bootstrap-table";
-
+import Checkbox from "./Checkbox";
 // import jobs from "../../../redux/Job";
-// import "../../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
-import {getJobsList, addJob, deleteJob} from "../../../redux/Job";
-//
-// const selectRowProp = {
-//   mode: 'checkbox',
-//   clickToSelect: true,
-//   // hideSelectColumn: true,
-//   // unselectable: [2],
-//   // selected: [1],
-//   bgColor: 'orange'
-// };
+import {getJobsList, deleteJob} from "../../../redux/Job";
 
 class JobList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItems: [],
-      checkboxState: false
+      selectedItems: []
     }
-    // this.jobs = getJobsList();
-
     this.handleDeleteJob = this.handleDeleteJob.bind(this);
-    this.handleCheckbox = this.handleCheckbox.bind(this);
+    this.handleCheckoutButton = this.handleCheckoutButton.bind(this);
+    this.addToSelectedItems = this.addToSelectedItems.bind(this);
   }
 
-  handleDeleteJob(e) {
-    // for (let i = 0; i < row.length; i++) {
-    //   this.props.deleteJob(row[i]);
-    // }
-
-    this.state.selectedItems.forEach(id => {
-      this.props.deleteJob(id)
+  addToSelectedItems = (isChecked, job) => {
+    let updatedItems;
+    if (isChecked) {
+      updatedItems = [...this.state.selectedItems, job]
+    } else {
+      updatedItems = this.state.selectedItems.filter(item => item._id !== job._id);
+    }
+    this.setState({
+      selectedItems: updatedItems
     });
   }
 
-  handleCheckoutButton() {
-    console.log("Checked out");
+  handleDeleteJob(props) {
+    this.state.selectedItems.map(item => {
+      return this.props.deleteJob(item._id)
+    })
   }
 
-  handleCheckbox(id, job) {
-    job.checked = !job.checked
-    this.setState({
-      selectedItems: [...prevState, id],
-    })
-    console.log(this.state.selectedItems);
+  handleCheckoutButton () {
+    // Dispatch an action that should update these items to have `checkedOut: true`
+    // in the database
+    // When that finishes, forward the person to the "/checked-out" path
+    this.props.history.push("/checked-out");
+    // axios.get("/jobs?checkedOut=true")
   }
 
   render() {
+    const jobList = this.props.jobs.map(job => {
+      return(
+        <tr key={job._id}>
+          <Checkbox
+            job={job}
+            addItem={this.addToSelectedItems}/>
+          {/* <td>{job._id}</td> */}
+          <td>{job.name}</td>
+          <td>{job.jobId}</td>
+        </tr>
+      )
+    })
+
     return (
       <div>
         <h1>Current Jobs</h1>
@@ -59,55 +63,26 @@ class JobList extends Component {
           <thead>
             <tr>
               <th>Checkout</th>
-              <th>Job ID</th>
+              {/* <th>Job ID</th> */}
+              <th>Client Name</th>
               <th>Client ID</th>
-              <th>Name</th>
             </tr>
           </thead>
           <tbody>
-            {this.props.jobs.map(job => {
-              job.isSelected = false;
-              return(
-                <tr key={job._id}>
-                  <input
-                    name="selectedItems"
-                    value={job._id}
-                    type="checkbox"
-                    onClick={() => this.handleCheckbox(job._id, job)}/>
-                  <td>{job._id}</td>
-                  <td>{job.jobId}</td>
-                  <td>{job.name}</td>
-                </tr>
-              )
-            })}
+            {jobList}
           </tbody>
         </table>
-        <button className="checkout" onClick={this.handleCheckoutButton}>Checkout</button>
+        <button className="checkout" onClick={() => this.handleCheckoutButton()}>Checkout</button>
         <button className="delete" onClick={this.handleDeleteJob}>Delete</button>
-        {/* <InsertButton
-          btnText="Checkout"
-          onClick={() => this.handleCheckoutButton()}/>
-        <BootstrapTable
-            data={this.props.jobs}
-            // remote={true}
-            insertButton={true}
-            deleteRow={true}
-            options={{onDeleteRow: this.handleDeleteJob}, {insertBtn: this.handleCheckoutButton}}
-            selectRow={selectRowProp}
-            bodyStyle={{background: "white"}}>
-          <TableHeaderColumn isKey dataField='_id'>Job ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='jobId'>Client ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>Name</TableHeaderColumn>
-        </BootstrapTable> */}
-        {/* <button onClick={this.handleDeleteJob}>Delete</button> */}
       </div>
-    )}
-  }
-
-function mapStateToProps(state) {
-  return{
-    jobs: state.jobs
+    )
   }
 }
 
-export default connect(mapStateToProps, {getJobsList, addJob, deleteJob})(JobList);
+  function mapStateToProps(state) {
+    return{
+      jobs: state.jobs
+    }
+  }
+
+export default connect(mapStateToProps, {getJobsList, deleteJob})(JobList);

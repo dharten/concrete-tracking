@@ -33,6 +33,19 @@ export function deleteJob(id) {
   }
 }
 
+export function checkOutJobs(jobs) {
+  return dispatch => {
+    const ids = jobs.map(job => job._id);
+    axios.put(`/concrete/check-out`, {ids}).then(response => {
+      console.log(response.data);
+      dispatch({
+        type: "GET_JOBS_LIST",
+        data: response.data
+      })
+    })
+  }
+}
+
 export default function reducer(prevState = [], action) {
   switch (action.type) {
     case "GET_JOBS_LIST":
@@ -41,6 +54,8 @@ export default function reducer(prevState = [], action) {
       return [...prevState, action.data]
     case "DELETE_JOB":
       return prevState.filter(job => job._id !== action.data._id)
+    case "CHECKOUT_JOB":
+      return prevState.filter(job => job._id )
     default:
       return prevState;
   }

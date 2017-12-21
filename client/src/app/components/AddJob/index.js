@@ -16,7 +16,8 @@ class AddJob extends React.Component {
         state: "",
         zip: ""
       },
-      phone: ""
+      phone: "",
+      checkedOut: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

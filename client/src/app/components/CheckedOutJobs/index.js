@@ -1,40 +1,16 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
+import CheckedOutJob from "./CheckOutJob.js"
 
 import {getJobsList, deleteJob} from "../../../redux/Job";
+import Modal from "./Modal";
 import "./CheckedOutJobs.css";
 
 class CheckedOutJobs extends Component{
-  constructor() {
-    super();
-    this.state = {
-
-    }
-  }
-
-  componentDidMount() {
-    console.log(getJobsList());
-  }
-
   render() {
-    const job = this.props.jobs.map(job => {
-      return(
-          <div key={job._id} className="clientInfo">
-            <div>
-              <label>Client Name: </label>
-              <span>{job.name}</span>
-              <div>
-                <label>Client Id: </label>
-                <span>{job.jobId}</span>
-              </div>
-            </div>
-            {/* <label>Client Address: </label>
-            <span>{job.name}</span> */}
-          </div>
-      )
-    })
+    const job = this.props.jobs.map(job => job.checkedOut === true && <CheckedOutJob key={job._id} job={job} />)
     return(
-      <div>
+      <div className="checkedOut">
         <h2>Checked Out Jobs</h2>
         {job}
       </div>

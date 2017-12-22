@@ -15,6 +15,7 @@ export default function Navbar(props) {
       <Link to="/">Home</Link>
       <Link to="/job-list">List of Jobs</Link>
       <Link to="/add-job">Add Job</Link>
+      <Link to="/checked-out">Checked Out</Link>
       {/* <span>{date}</span> */}
 
     </nav>

@@ -4,9 +4,11 @@
 }
 
 .navbar a {
-  margin: 5px;
+  margin: 10px;
   text-decoration: none;
   color: black;
+  border: black solid 2px;
+  padding: 3px;
 }
 
 .navbar a:visited {

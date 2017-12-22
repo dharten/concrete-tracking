@@ -1,5 +1,14 @@
 .clientInfo {
   border: black solid 1px;
   margin: 10px auto;
-  
+  width: 70%;
+  background-color: white;
+}
+
+.checkedOut {
+  padding: 10px;
+  border: solid black 2px;
+  width: 70%;
+  margin: auto;
+  background-color: lightgrey;
 }

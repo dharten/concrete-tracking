@@ -18,7 +18,11 @@ const jobSchema = new Schema ({
     zip: String
   },
   phone: String,
-  checkedOut: Boolean
+  checkedOut: Boolean,
+  location: String,
+  sampleId: Number,
+  time: String,
+  date: String
 })
 
 module.exports = mongoose.model("Job", jobSchema);

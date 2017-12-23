@@ -18,20 +18,36 @@ jobRoutes.route("/")
     })
   })
 
-jobRoutes.route("/check-out")
-  .put((req, res) => {
-    Job.update(
-      {_id: {$in: req.body.ids}},
-      {$set: {checkedOut: true}},
-      {multi: true},
-      (err, result) => {
-        if (err) return res.status(500).send(err);
-        Job.find((err, jobs) => {
+  jobRoutes.route("/job-list")
+    .put((req, res) => {
+      console.log("worked this far");
+      Job.update(
+        {_id: {$in: req.body.ids}},
+        {$set: {checkedOut: true}},
+        {multi: true},
+        (err, result) => {
           if (err) return res.status(500).send(err);
-          res.send(jobs)
-        })
+          Job.find((err, jobs) => {
+            if (err) return res.status(500).send(err);
+            res.send(jobs)
+          })
+      })
     })
-  })
+
+  jobRoutes.route("/check-in")
+    .put((req, res) => {
+      Job.update(
+        {_id: req.body.id},
+        {$set: {checkedOut: false}},
+        {multi: true},
+        (err, result) => {
+          if (err) return res.status(500).send(err);
+          Job.find((err, jobs) => {
+            if (err) return res.status(500).send(err);
+            res.send(jobs)
+          })
+      })
+    })
 
 jobRoutes.route("/:id")
   .get((req, res) => {

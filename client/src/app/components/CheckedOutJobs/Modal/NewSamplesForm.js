@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 
-// import {getJobsList} from "../../../../redux";
+import {addSample} from "../../../../redux/Sample";
 
 class NewSamplesForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       location: "",
       sampleId: "",
@@ -13,20 +13,23 @@ class NewSamplesForm extends Component {
       date: ""
     }
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  handleSubmit(e) {
+  handleSubmit(e, prevState) {
     e.preventDefault();
-    console.log("Submitted");
+    console.log(this.props)
+    // this.props.addSample(this.state);
   }
 
   render() {
+    const time = new Date().toLocaleTimeString();
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form className="sampleForm" onSubmit={this.handleSubmit}>
         <label>Sample Location </label>
         <input
           type="text"
@@ -37,13 +40,13 @@ class NewSamplesForm extends Component {
         <input
           type="number"
           name="sampleId"
-          value={this.state.location}
+          value={this.state.sampleId}
           onChange={this.handleChange}/>
         <label>Time </label>
         <input
           type="text"
           name="time"
-          value={this.state.time}
+          value={time}
           onChange={this.handleChange}/>
         <label>Date </label>
         <input
@@ -51,11 +54,15 @@ class NewSamplesForm extends Component {
           name="date"
           value={this.state.date}
           onChange={this.handleChange}/>
-        <button>+</button>
-        <button>Submit Samples</button>
+          {/* <div>
+            <button className="addNewSample" onClick={this.addNewSample}>+</button>
+          </div> */}
+          <div>
+            <button className="submit" onClick={this.handleSubmit}>Submit Sample</button>
+          </div>
       </form>
     )
   }
 }
 
-export default connect(state => state, null)(NewSamplesForm)
+export default connect(null, {addSample})(NewSamplesForm)

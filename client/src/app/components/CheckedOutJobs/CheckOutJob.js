@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import Modal from "./Modal";
 import NewSamplesForm from "./Modal/NewSamplesForm.js";
+import {checkInJob} from "../../../redux/Job";
+import {connect} from "react-redux";
 
 class CheckedOutJob extends Component{
   constructor(props) {
@@ -22,7 +24,8 @@ class CheckedOutJob extends Component{
   }
 
   checkIn() {
-    console.log(this.props);
+    const id = this.props.job._id;
+    this.props.checkInJob(id);
   }
 
   render() {
@@ -33,15 +36,17 @@ class CheckedOutJob extends Component{
           <span>{this.props.job.name}</span>
         </div>
         <button onClick={() => this.openModal()}>Add Sample</button>
-        <button onClick={() => this.checkIn()}>Check In</button>
+        <div>
+          <button onClick={() => this.checkIn()}>Check Back In</button>
+        </div>
         <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
           <h1>{this.props.job.name}</h1>
-          <p>Job ID: {this.props.jobId}</p>
+          <p>Job ID: {this.props.job.jobId}</p>
           <p>Phone: {this.props.job.phone}</p>
-          <p>Address: {this.props.job.address.street} {this.props.job.address.city} {this.props.job.address.state} {this.props.job.address.zip}</p>
+          <p>Address: {this.props.job.address.street}, {this.props.job.address.city}, {this.props.job.address.state}, {this.props.job.address.zip}</p>
           <NewSamplesForm />
           {/* <button className="delete" onClick={this.handleDelete}>Delete</button> */}
-          <button onClick={() => this.closeModal()}>Close</button>
+          <button className="closeModal" onClick={() => this.closeModal()}>Close</button>
         </Modal>
       </div>
     )
@@ -49,4 +54,4 @@ class CheckedOutJob extends Component{
 }
 
 
-export default CheckedOutJob;
+export default connect(state => state, {checkInJob})(CheckedOutJob);

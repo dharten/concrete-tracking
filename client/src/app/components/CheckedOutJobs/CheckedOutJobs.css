@@ -2,7 +2,7 @@
   border: black solid 1px;
   margin: 10px auto;
   width: 70%;
-  background-color: white;
+  background-color: gray;
 }
 
 .checkedOut {
@@ -11,4 +11,28 @@
   width: 70%;
   margin: auto;
   background-color: lightgrey;
+}
+
+label {
+  width: auto;
+  margin: 5px;
+}
+
+input {
+  width: auto;
+}
+
+button {
+  margin: 5px auto;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.addNewSample {
+  margin: 5px auto;
+}
+
+.sampleForm {
+  font-size: .8em;
 }

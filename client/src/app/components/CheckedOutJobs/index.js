@@ -2,8 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import CheckedOutJob from "./CheckOutJob.js"
 
-import {getJobsList, deleteJob} from "../../../redux/Job";
-import Modal from "./Modal";
+import {getJobsList} from "../../../redux/Job";
 import "./CheckedOutJobs.css";
 
 class CheckedOutJobs extends Component{

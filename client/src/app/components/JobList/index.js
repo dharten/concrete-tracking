@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import Checkbox from "./Checkbox";
-// import jobs from "../../../redux/Job";
 import {getJobsList, deleteJob, checkOutJobs} from "../../../redux/Job";
 
 class JobList extends Component {
@@ -34,12 +33,7 @@ class JobList extends Component {
   }
 
   handleCheckoutButton () {
-    // Dispatch an action that should update these items to have `checkedOut: true`
-    // in the database
     this.props.checkOutJobs(this.state.selectedItems);
-    // When that finishes, forward the person to the "/checked-out" path
-    this.props.history.push("/checked-out");
-    // axios.get("/jobs?checkedOut=true")
   }
 
   render() {
@@ -48,10 +42,7 @@ class JobList extends Component {
     .map(job => {
       return(
         <tr key={job._id}>
-          <Checkbox
-            job={job}
-            addItem={this.addToSelectedItems}/>
-          {/* <td>{job._id}</td> */}
+          <Checkbox job={job} addItem={this.addToSelectedItems}/>
           <td>{job.name}</td>
           <td>{job.jobId}</td>
         </tr>
@@ -64,10 +55,6 @@ class JobList extends Component {
       return(
         <tr key={job._id}>
           <td>User ID</td>
-          {/* <Checkbox
-            job={job}
-            addItem={this.addToSelectedItems}/> */}
-          {/* <td>{job._id}</td> */}
           <td>{job.name}</td>
           <td>{job.jobId}</td>
         </tr>
@@ -82,7 +69,6 @@ class JobList extends Component {
           <thead>
             <tr>
               <th>Checkout</th>
-              {/* <th>Job ID</th> */}
               <th>Client Name</th>
               <th>Client ID</th>
             </tr>
@@ -91,14 +77,15 @@ class JobList extends Component {
             {availableJobs}
           </tbody>
         </table>
-        <button className="checkout" onClick={() => this.handleCheckoutButton()}>Checkout</button>
+        <div>
+          <button className="checkout" onClick={() => this.handleCheckoutButton()}>Checkout</button>
+        </div>
         <button className="delete" onClick={this.handleDeleteJob}>Delete</button>
         <h1>Checked Out Jobs</h1>
         <table>
           <thead>
             <tr>
               <th>Checked Out By</th>
-              {/* <th>Job ID</th> */}
               <th>Client Name</th>
               <th>Client ID</th>
             </tr>

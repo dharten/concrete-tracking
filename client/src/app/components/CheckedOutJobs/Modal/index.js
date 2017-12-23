@@ -1,7 +1,5 @@
 import React, {Component} from "react";
 
-import NewSamplesForm from "./NewSamplesForm";
-
 export default class Modal extends Component {
   render() {
     if (this.props.isOpen === false)
@@ -19,20 +17,6 @@ export default class Modal extends Component {
       padding: "15px"
     }
 
-    // if (this.props.width && this.props.height) {
-    //   modalStyle.width = this.props.width + 'px'
-    //   modalStyle.height = this.props.height + 'px'
-    //   modalStyle.marginLeft = '-' + (this.props.width/2) + 'px',
-    //   modalStyle.marginTop = '-' + (this.props.height/2) + 'px',
-    //   modalStyle.transform = null
-    // }
-    //
-    // if (this.props.style) {
-    //   for (let key in this.props.style) {
-    //     modalStyle[key] = this.props.style[key]
-    //   }
-    // }
-
     let backdropStyle = {
       position: 'absolute',
       width: '100%',
@@ -42,12 +26,6 @@ export default class Modal extends Component {
       zIndex: '9998',
       background: 'rgba(129, 129, 129, 0.5)'
     }
-
-    // if (this.props.backdropStyle) {
-    //   for (let key in this.props.backdropStyle) {
-    //     backdropStyle[key] = this.props.backdropStyle[key]
-    //   }
-    // }
 
     return (
       <div className={this.props.containerClassName}>

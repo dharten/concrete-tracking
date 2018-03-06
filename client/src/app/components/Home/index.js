@@ -4,8 +4,8 @@ export default function Home() {
   return(
     <div>
       {/* <img src="https://expeditionworkshed.org/assets/high-strength-concrete-cylinder-compression-test-440x330.jpg" alt="Concrete Compression Test"/> */}
+      <img id="cylinders" src={require("../../../img/concrete-testing-handwritten.jpeg")} width="100%" alt=""/>
       <h2>Lab Data Tracking</h2>
-      <img src={require("../../../img/concrete-testing-handwritten.jpeg")} width="100%" alt=""/>
       <div className="triangle-down"></div>
       <p>Imagine having to write the same information down on multiple documents and samples. The task could tedious, and monotonous for the individual performing the task. Not only that, but it also leaves a lot of room for human error, and waisted a lot of time that could be spent doing other tasks that a computer isn't set up to handle.</p>
       {/* <div className="triangle-down"></div> */}

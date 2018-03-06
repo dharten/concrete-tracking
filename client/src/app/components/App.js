@@ -8,17 +8,6 @@ import JobList from "../components/JobList";
 import AddJob from "../components/AddJob";
 import CheckedOutJobs from "../components/CheckedOutJobs";
 
-// function CheckedOutJobs(props) {
-//   console.log(props.location);
-//   return (
-//     <div>
-//       {props.location.state.map(item => (
-//         <Link to={{pathname: `/checked-out/${item._id}`, state: item}}>{item._id}</Link>
-//       ))}
-//     </div>
-//   )
-// }
-
 function JobDetail(props) {
   const job = props.location.state;
   return (
@@ -28,7 +17,6 @@ function JobDetail(props) {
     </div>
   )
 }
-
 
 export default function App(props) {
   return(

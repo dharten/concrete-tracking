@@ -20,7 +20,6 @@ jobRoutes.route("/")
 
   jobRoutes.route("/job-list")
     .put((req, res) => {
-      console.log("worked this far");
       Job.update(
         {_id: {$in: req.body.ids}},
         {$set: {checkedOut: true}},

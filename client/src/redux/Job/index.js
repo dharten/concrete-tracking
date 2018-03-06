@@ -37,7 +37,6 @@ export function checkOutJobs(jobs) {
   return dispatch => {
     const ids = jobs.map(job => job._id);
     axios.put(`/concrete/job-list`, {ids}).then(response => {
-      console.log(response.data);
       dispatch({
         type: "GET_JOBS_LIST",
         data: response.data

@@ -43,7 +43,7 @@ class CheckedOutJob extends Component{
           <h1>{this.props.job.name}</h1>
           <p>Job ID: {this.props.job.jobId}</p>
           <p>Phone: {this.props.job.phone}</p>
-          <p>Address: {this.props.job.address.street}, {this.props.job.address.city}, {this.props.job.address.state}, {this.props.job.address.zip}</p>
+          <p>Address: {this.props.job.address.street, this.props.job.address.city, this.props.job.address.state, this.props.job.address.zip}</p>
           <NewSamplesForm />
           {/* <button className="delete" onClick={this.handleDelete}>Delete</button> */}
           <button className="closeModal" onClick={() => this.closeModal()}>Close</button>
